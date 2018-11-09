@@ -40,4 +40,8 @@ class ApplicationController < Sinatra::Base
     redirect to "/babies/#{@baby.id}"
   end
 
+  get "/babies/:id" do
+    erb :'naps/show'
+  end
+
 end
