@@ -1,5 +1,9 @@
 <h1>here are your babies</h1>
 
+<a href="/new">Enter a new baby</a>
+
+<ul>
 <% Baby.all.each do |baby| %>
-	<%= baby.name %>
+	<li><%= baby.name %></li>
 <% end %>
+</ul>

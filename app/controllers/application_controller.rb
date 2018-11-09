@@ -29,4 +29,12 @@ class ApplicationController < Sinatra::Base
     erb :'babies/index'
   end
 
+  get "/new" do
+    erb :'babies/new'
+  end
+
+  post "/babies" do
+    binding.pry
+  end
+
 end
