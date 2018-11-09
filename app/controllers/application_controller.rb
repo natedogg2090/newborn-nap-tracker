@@ -34,7 +34,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/babies" do
-    binding.pry
+    @baby = Baby.new(name: params[:name], birthday: params[:birthday])
+    @baby.save
+
+    redirect to "/babies/#{@baby.id}"
   end
 
 end
