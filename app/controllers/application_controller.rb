@@ -29,6 +29,12 @@ class ApplicationController < Sinatra::Base
     erb :'users/login'
   end
 
+  post "/login" do
+    @user = User.find_by(email: params[:email])
+
+    redirect to '/index'
+  end
+
   get "/index" do
     erb :'babies/index'
   end
