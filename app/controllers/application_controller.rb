@@ -54,4 +54,8 @@ class ApplicationController < Sinatra::Base
     erb :'naps/show'
   end
 
+  get "/naps/new" do
+    erb :'naps/new'
+  end
+
 end

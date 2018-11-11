@@ -1,6 +1,11 @@
 <h1>Naps</h1>
 
+
 <% Nap.all.each do |nap| %>
-	<%= nap.start_time %>
-	<%= nap.end_time %>
+	<ol type="<%=nap.id%>">
+		<ul>
+			<li><%= nap.start_time %></li>
+			<li><%= nap.end_time %></li>
+		</ul>
+	</ol>
 <% end %>

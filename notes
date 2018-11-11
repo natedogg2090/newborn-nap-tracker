@@ -1,0 +1,3 @@
+add date validation for birthday entry -- date cannot be in the future.
+
+time validation for nap entry cannot be in the future.
