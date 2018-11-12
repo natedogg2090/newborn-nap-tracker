@@ -1,7 +1,6 @@
 @media screen {
   /* --- Reset Styles --- */
   * {
-    list-style: none;
     margin: 0;
     padding: 0;
   }
@@ -112,4 +111,30 @@
     font-size: 18px;
     line-height: 24px;
   }
+}
+
+/* --- Baby Naps --- */
+
+.wrapper ol {
+  list-style-type: decimal;
+}
+
+ol {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  position: relative;
+}
+
+ul {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  position: relative;
 }

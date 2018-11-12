@@ -1,0 +1,8 @@
+<h1>Here are all the naps for <%= @baby.name %></h1>
+
+<ul>
+<% Nap.all.each do |nap| %>
+	<li>Start Time: <%= nap.start_time %></li>
+	<li>End Time: <%= nap.end_time %></li>
+<% end %>
+</ul>

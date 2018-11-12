@@ -51,11 +51,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/babies/:id" do
-    erb :'naps/show'
+    @baby = Baby.find_by_id(params[:id])
+    erb :'naps/index'
   end
 
   get "/naps/new" do
     erb :'naps/new'
+  end
+
+  post "/naps" do
+    @nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
+    @nap.save
+    
+    redirect to "naps/show"
   end
 
 end
