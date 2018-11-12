@@ -6,3 +6,7 @@ write spec tests
 
 naps should have a baby_id
 naps should have a start and end time
+
+babies should be assigned to an owner.
+
+ordered list of naps - naps should be displayed as their own block. also calculate time of nap.

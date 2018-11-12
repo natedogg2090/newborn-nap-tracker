@@ -44,26 +44,47 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/babies" do
-    @baby = Baby.new(name: params[:name], birthday: params[:birthday])
-    @baby.save
+    binding.pry
+    if logged_in?
+      user = User.find_by(session[:user_id])
+      baby = Baby.new(name: params[:name], birthday: params[:birthday])
+      baby.user_id = user.id
+      baby.save
 
-    redirect to "/babies/#{@baby.id}"
+      redirect to "/babies/#{@baby.id}/naps"
+    else
+      redirect to "/signup"
+    end
   end
 
-  get "/babies/:id" do
+  get "/babies/:id/naps" do
     @baby = Baby.find_by_id(params[:id])
     erb :'naps/index'
   end
 
-  get "/naps/new" do
+  get "babies/:id/naps/new" do
+    binding.pry
+    @baby = Baby.find_by_id(params[:id])
     erb :'naps/new'
   end
 
   post "/naps" do
-    @nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
-    @nap.save
+    # binding.pry
+    nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
+    nap.save
     
     redirect to "naps/show"
+  end
+
+  get "/naps/show" do
+    @nap = Nap.find_by
+    erb :'naps/show'
+  end
+
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
   end
 
 end
