@@ -57,7 +57,7 @@ class ApplicationController < Sinatra::Base
       baby.user_id = user.id
       baby.save
 
-      redirect to "/babies/#{@baby.id}/naps"
+      redirect to "/babies/#{baby.id}/naps"
     else
       redirect to "/signup"
     end
