@@ -18,7 +18,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    
     @user = User.new(name: params[:name], email: params[:email], password: params[:password])
     @user.save
 
@@ -50,32 +49,31 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/babies" do
-    binding.pry
     if logged_in?
       user = User.find_by(session[:user_id])
       baby = Baby.new(name: params[:name], birthday: params[:birthday])
       baby.user_id = user.id
       baby.save
 
-      redirect to "/babies/#{baby.id}/naps"
+      redirect to "/babies/#{baby.id}"
     else
       redirect to "/signup"
     end
   end
 
-  get "/babies/:id/naps" do
+  get "/babies/:id" do
     @baby = Baby.find_by_id(params[:id])
     erb :'naps/index'
   end
 
-  get "babies/:id/naps/new" do
-    binding.pry
+  get "/babies/:id/new" do
     @baby = Baby.find_by_id(params[:id])
     erb :'naps/new'
   end
 
   post "/naps" do
-    # binding.pry
+    binding.pry
+    user = User.find_by(session[:id])
     nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
     nap.save
     
