@@ -72,7 +72,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/naps" do
-    binding.pry
     user = User.find_by(session[:id])
     nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
     nap.save
@@ -81,7 +80,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/naps/show" do
-    @nap = Nap.find_by
+    @baby = Baby.find_by(user_id: session[:user_id])
+    @naps = Nap.find_by(baby_id: @baby.id)
     erb :'naps/show'
   end
 
