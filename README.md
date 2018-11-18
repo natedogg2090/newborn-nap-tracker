@@ -1,6 +1,6 @@
 # Newborn-Nap-Tracker
 
-This is a Sinatra Application I created as a tool to help my wife and I track the sleep patterns/schedule of our infant son. In other words...we're too sleep deprived to remember when he went to bed, for how long he slept, etc.
+This is a Sinatra Application I created as a tool to help my wife and I track the sleep patterns of our newborn son.
 
 ## Contributing
 
