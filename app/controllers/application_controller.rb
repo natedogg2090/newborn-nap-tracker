@@ -63,7 +63,6 @@ class ApplicationController < Sinatra::Base
 
   get "/babies/:id" do
     @baby = Baby.find_by_id(params[:id])
-    binding.pry
     erb :'naps/index'
   end
 
@@ -87,9 +86,9 @@ class ApplicationController < Sinatra::Base
     redirect to "naps/show"
   end
 
-  get "/naps/show" do
-    @baby = Baby.find_by(user_id: session[:user_id])
-    @naps = Nap.find_by(baby_id: @baby.id)
+  get "/naps/:id" do
+    binding.pry
+    @naps = Nap.find_by_id(params[:id])
     erb :'naps/show'
   end
 
@@ -97,6 +96,10 @@ class ApplicationController < Sinatra::Base
     baby = Baby.find_by_id(params[:id])
     baby.update(name: params[:name], birthday: params[:birthday].to_date)
     redirect to "babies/#{baby.id}"
+  end
+
+  patch "naps/:id" do
+    binding.pry
   end
 
   helpers do
