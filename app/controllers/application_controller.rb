@@ -63,6 +63,7 @@ class ApplicationController < Sinatra::Base
 
   get "/babies/:id" do
     @baby = Baby.find_by_id(params[:id])
+    binding.pry
     erb :'naps/index'
   end
 
