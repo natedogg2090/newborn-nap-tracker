@@ -1,0 +1,8 @@
+<h1>Update Baby Details</h1>
+
+<form action="/babies/<%= @baby.id %>" method="POST">
+	<input id="hidden" type="hidden" name="_method" value="patch">
+	<p>Baby Name: <input type="text" name="name" id="name" value="<%= @baby.name %>"></p>
+	<p>Birthday: <input type="date" name="birthday" id="birthday" value="<%= @birthday %>"></p>
+	<input type="submit" name="submit" id="submit">
+</form>

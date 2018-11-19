@@ -71,6 +71,13 @@ class ApplicationController < Sinatra::Base
     erb :'naps/new'
   end
 
+  get "/babies/:id/edit" do
+    @baby = Baby.find_by_id(params[:id])
+    birthday_string = @baby.birthday.to_s
+    @birthday = birthday_string.slice(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+    erb :'babies/edit'
+  end
+
   post "/naps" do
     user = User.find_by(session[:id])
     nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
