@@ -92,6 +92,12 @@ class ApplicationController < Sinatra::Base
     erb :'naps/show'
   end
 
+  patch "/babies/:id" do
+    baby = Baby.find_by_id(params[:id])
+    baby.update(name: params[:name], birthday: params[:birthday].to_date)
+    redirect to "babies/#{baby.id}"
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
