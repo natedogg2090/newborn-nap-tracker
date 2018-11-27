@@ -99,7 +99,7 @@ class ApplicationController < Sinatra::Base
   end
 
   patch "naps/:id" do
-    binding.pry
+    binding.pry #resume here
   end
 
   helpers do
