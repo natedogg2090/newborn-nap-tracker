@@ -11,6 +11,10 @@ describe ApplicationController do
       expect(last_response.status).to eq(200)
       expect(last_response.body).to include("Welcome to the Newborn Nap Tracker!")
     end
+
+    it "contains a link to the signup page" do
+      expect(content).to have_css("a[href='/signup']")
+    end
     
     
   end
