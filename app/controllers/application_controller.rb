@@ -87,7 +87,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/naps/:id" do
-    binding.pry
     @naps = Nap.find_by_id(params[:id])
     erb :'naps/show'
   end
