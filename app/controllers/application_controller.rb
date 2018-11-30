@@ -14,12 +14,17 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/signup" do
-    erb :'users/signup'
+    if session[:user_id] == nil
+      erb :'users/signup'
+    else
+      redirect to '/index'
+    end
   end
 
   post "/signup" do
-    @user = User.new(name: params[:name], email: params[:email], password: params[:password])
-    @user.save
+    binding.pry
+    user = User.new(name: params[:name], email: params[:email], password: params[:password])
+    user.save
 
     redirect to '/index'
   end
@@ -78,7 +83,8 @@ class ApplicationController < Sinatra::Base
     erb :'babies/edit'
   end
 
-  post "/naps" do
+  post "/naps/:id" do
+    binding.pry
     user = User.find_by(session[:id])
     nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
     nap.save
@@ -95,10 +101,11 @@ class ApplicationController < Sinatra::Base
     baby = Baby.find_by_id(params[:id])
     baby.update(name: params[:name], birthday: params[:birthday].to_date)
     redirect to "babies/#{baby.id}"
+    #flash a message displaying to the user they have successfully updated the baby
   end
 
   patch "naps/:id" do
-    binding.pry #resume here
+
   end
 
   helpers do
