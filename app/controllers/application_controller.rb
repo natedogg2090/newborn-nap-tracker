@@ -22,11 +22,18 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    binding.pry
     user = User.new(name: params[:name], email: params[:email], password: params[:password])
-    user.save
+    
+    if user.save
+      if user.authenticate(params[:password])
+        session[:user_id] = @user.id
+      end
+      redirect to '/index'
+    else
+      redirect to '/signup'
+    end
 
-    redirect to '/index'
+    
   end
 
   get "/login" do

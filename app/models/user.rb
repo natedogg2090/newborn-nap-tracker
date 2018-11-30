@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   has_many :babies
   has_secure_password
 
-  # validates :name, :pressence => true
-  # validates :email, :pressence => true
-  # validates :password, :pressence => true
+  validates :name, :presence => true
+  validates :email, :presence => true
+  validates :password, :presence => true
 
 end
