@@ -33,7 +33,6 @@ class ApplicationController < Sinatra::Base
       redirect to '/signup'
     end
 
-    
   end
 
   get "/login" do
@@ -45,15 +44,20 @@ class ApplicationController < Sinatra::Base
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to 'index'
+      redirect to '/index'
     else
-      redirect to 'signup'
+      redirect to '/signup'
     end
     
   end
 
   get "/index" do
-    erb :'babies/index'
+    if logged_in?
+      @user = User.find_by(session[:user_id])
+      erb :'babies/index'
+    else
+      redirect to '/'
+    end
   end
 
   get "/new" do
@@ -91,7 +95,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/naps/:id" do
-    binding.pry
     user = User.find_by(session[:id])
     nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
     nap.save

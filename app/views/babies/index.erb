@@ -1,9 +1,10 @@
-<h1>here are your babies</h1>
-
-<a href="/new">Enter a new baby</a>
+<h1>Hello <%= @user.name %>!</h1>
+<h2>Here are your babies</h2>
 
 <ul>
 <% Baby.all.each do |baby| %>
-	<li><%= baby.name %></li>
+	<li><a href="/babies/<%= baby.id %>"><%= baby.name %></li>
 <% end %>
 </ul>
+
+<a href="/new">Enter a new baby</a>
