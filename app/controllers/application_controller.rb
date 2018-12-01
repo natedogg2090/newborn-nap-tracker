@@ -94,12 +94,16 @@ class ApplicationController < Sinatra::Base
     erb :'babies/edit'
   end
 
-  post "/naps/:id" do
-    user = User.find_by(session[:id])
-    nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
-    nap.save
-    
-    redirect to "naps/show"
+  post "/naps" do
+    if logged_in?
+      user = User.find_by(session[:id])
+      baby = Baby.find_by(params[:name])
+      nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
+      nap.baby_id = baby.id
+      nap.save
+      
+      redirect to "naps/show"
+    end
   end
 
   get "/naps/:id" do

@@ -15,7 +15,6 @@ describe ApplicationController do
       expect(last_response.body).to include("Welcome to the Newborn Nap Tracker!")
     end
     
-    
   end
 
   describe "signup" do
