@@ -97,17 +97,18 @@ class ApplicationController < Sinatra::Base
   post "/naps" do
     if logged_in?
       user = User.find_by(session[:id])
-      baby = Baby.find_by(params[:name])
+      baby = Baby.find_by(name: params[:name])
       nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
       nap.baby_id = baby.id
       nap.save
       
-      redirect to "naps/show"
+      redirect to "naps/#{nap.id}"
     end
   end
 
   get "/naps/:id" do
     @naps = Nap.find_by_id(params[:id])
+    @baby = Baby.find_by(id: @naps.baby_id)
     erb :'naps/show'
   end
 
