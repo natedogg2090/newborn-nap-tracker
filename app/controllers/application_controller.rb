@@ -113,7 +113,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/naps/:id/edit" do
-    binding.pry
     @naps = Nap.find_by_id(params[:id])
     nap_start_string = @naps.start_time.to_s
     @nap_start = nap_start_string.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
@@ -123,16 +122,20 @@ class ApplicationController < Sinatra::Base
   end
 
   patch "/babies/:id" do
-    baby = Baby.find_by_id(params[:id])
-    baby.update(name: params[:name], birthday: params[:birthday].to_date)
-    redirect to "babies/#{baby.id}"
+    if logged_in?
+      baby = Baby.find_by_id(params[:id])
+      baby.update(name: params[:name], birthday: params[:birthday].to_date)
+      redirect to "babies/#{baby.id}"
+    end
     #flash a message displaying to the user they have successfully updated the baby
   end
 
   patch "/naps/:id" do
-    naps = Nap.find_by(params[:id])
-    naps.update(start_time: params[:start_time].to_datetime, end_time: params[:end_time].to_datetime, notes: params[:notes])
-    redirect to "naps/#{naps.id}"
+    if logged_in?
+      naps = Nap.find_by(params[:id])
+      naps.update(start_time: params[:start_time].to_datetime, end_time: params[:end_time].to_datetime, notes: params[:notes])
+      redirect to "naps/#{naps.id}"
+    end
   end
 
   helpers do
