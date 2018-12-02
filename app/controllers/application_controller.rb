@@ -112,6 +112,16 @@ class ApplicationController < Sinatra::Base
     erb :'naps/show'
   end
 
+  get "/naps/:id/edit" do
+    binding.pry
+    @naps = Nap.find_by_id(params[:id])
+    nap_start_string = @naps.start_time.to_s
+    @nap_start = nap_start_string.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
+    nap_end_string = @naps.end_time.to_s
+    @nap_end = nap_end_string.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
+    erb :'naps/edit'
+  end
+
   patch "/babies/:id" do
     baby = Baby.find_by_id(params[:id])
     baby.update(name: params[:name], birthday: params[:birthday].to_date)
@@ -119,8 +129,10 @@ class ApplicationController < Sinatra::Base
     #flash a message displaying to the user they have successfully updated the baby
   end
 
-  patch "naps/:id" do
-
+  patch "/naps/:id" do
+    naps = Nap.find_by(params[:id])
+    naps.update(start_time: params[:start_time].to_datetime, end_time: params[:end_time].to_datetime, notes: params[:notes])
+    redirect to "naps/#{naps.id}"
   end
 
   helpers do
