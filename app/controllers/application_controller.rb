@@ -79,6 +79,14 @@ class ApplicationController < Sinatra::Base
 
   get "/babies/:id" do
     @baby = Baby.find_by_id(params[:id])
+
+    @naps = []
+    Nap.all.each do |nap|
+      if nap.baby_id == @baby.id
+        @naps << nap
+      end
+    end
+
     erb :'naps/index'
   end
 

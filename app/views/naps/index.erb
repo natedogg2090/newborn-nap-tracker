@@ -1,10 +1,14 @@
 <h1>Here are all the naps for <%= @baby.name %></h1>
 
-<ul>
-<% Nap.all.each do |nap| %>
-	<li>Start Time: <%= nap.start_time %></li>
-	<li>End Time: <%= nap.end_time %></li>
+<ol type="1">
+<% @naps.each do |nap| %>
+	<li>Nap Details</li>
+		<ul>
+			<li>Start Time: <%= nap.start_time %></li>
+			<li>End Time: <%= nap.end_time %></li>
+			<li>Notes: <%= nap.notes %></li>
+		</ul>
 <% end %>
-</ul>
+</ol>
 
 <a href="/babies/<%= @baby.id %>/new">Enter a New Nap</a>
