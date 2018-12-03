@@ -115,8 +115,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/naps/:id" do
-    @naps = Nap.find_by_id(params[:id])
-    @baby = Baby.find_by(id: @naps.baby_id)
+    @nap = Nap.find_by_id(params[:id])
+    @baby = Baby.find_by(id: @nap.baby_id)
     erb :'naps/show'
   end
 

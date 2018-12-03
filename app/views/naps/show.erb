@@ -1,8 +1,9 @@
 <h1>Nap Details for <%= @baby.name%></h1>
 
 
-<p>Nap Start Time: <%= @naps.start_time %></p>
-<p>Nap End Time: <%= @naps.end_time %></p>
-<p>Notes: <%= @naps.notes %></p>
+<p>Nap Start Time: <%= @nap.start_time %></p>
+<p>Nap End Time: <%= @nap.end_time %></p>
+<p>Notes: <%= @nap.notes %></p>
 
+<p><a href="/naps/<%= @nap.id %>">Edit</a></p>
 <p><a href="/babies/<%= @baby.id %>">Back to Naps</a></p>
