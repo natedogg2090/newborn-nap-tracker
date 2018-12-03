@@ -2,7 +2,7 @@
 
 <ol type="1">
 <% @naps.each do |nap| %>
-	<li>Nap Details</li>
+	<li><a href="/naps/<%= nap.id %>">Nap Details</a></li>
 		<ul>
 			<li>Start Time: <%= nap.start_time %></li>
 			<li>End Time: <%= nap.end_time %></li>
