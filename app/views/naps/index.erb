@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>Here are all the naps for <%= @baby.name %></h1>
 
 <ol type="1">

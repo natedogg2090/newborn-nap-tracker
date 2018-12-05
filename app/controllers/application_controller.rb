@@ -1,4 +1,5 @@
 require './config/environment'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
 
@@ -7,6 +8,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "password_secure"
+    use Rack::Flash
   end
 
   get "/" do
@@ -71,6 +73,8 @@ class ApplicationController < Sinatra::Base
       baby.user_id = user.id
       baby.save
 
+      flash[:message] = "Congratulations on the new addition to the family!"
+
       redirect to "/babies/#{baby.id}"
     else
       redirect to "/signup"
@@ -133,9 +137,9 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       baby = Baby.find_by_id(params[:id])
       baby.update(name: params[:name], birthday: params[:birthday].to_date)
+      flash[:message] = "Your baby has been updated."
       redirect to "babies/#{baby.id}"
     end
-    #flash a message displaying to the user they have successfully updated the baby
   end
 
   patch "/naps/:id" do
