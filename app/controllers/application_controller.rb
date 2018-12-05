@@ -146,6 +146,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get "/logut" do
+    if session[:user_id] != nil
+      session.clear
+      redirect to "/login"
+    else
+      redirect to "/"
+    end
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
