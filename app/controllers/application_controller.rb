@@ -160,7 +160,7 @@ class ApplicationController < Sinatra::Base
   get "/logut" do
     if session[:user_id] != nil
       session.clear
-      redirect to "/login"
+      redirect to "/"
     else
       redirect to "/"
     end

@@ -16,6 +16,14 @@
   <body>
     <div class="wrapper">
 
+      <div class="login-status">
+        <% if logged_in? %>
+          <a href="/logut">Logout</a>
+        <% else %>
+          <a href="/signup">Signup</a> | <a href="/login">Login</a>
+        <% end %>
+      </div>
+
         <%= yield %>
 
       <footer class="branding">
