@@ -113,6 +113,8 @@ class ApplicationController < Sinatra::Base
       nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
       nap.baby_id = baby.id
       nap.save
+
+      flash[:message] = "Nap logged. Be sure to get some rest yourself."
       
       redirect to "naps/#{nap.id}"
     end
@@ -137,7 +139,9 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       baby = Baby.find_by_id(params[:id])
       baby.update(name: params[:name], birthday: params[:birthday].to_date)
+      
       flash[:message] = "Your baby has been updated."
+      
       redirect to "babies/#{baby.id}"
     end
   end
@@ -146,6 +150,9 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       naps = Nap.find_by(params[:id])
       naps.update(start_time: params[:start_time].to_datetime, end_time: params[:end_time].to_datetime, notes: params[:notes])
+      
+      flash[:message] = "This nap has been updated. Are you getting some rest?"
+
       redirect to "naps/#{naps.id}"
     end
   end
