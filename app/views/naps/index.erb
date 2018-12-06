@@ -6,10 +6,10 @@
 
 <ol type="1">
 <% @naps.each do |nap| %>
-	<li><a href="/naps/<%= nap.id %>">Nap Details</a></li>
+	<li>Nap <a href="/naps/<%= nap.id %>">(Details)</a></li>
 		<ul>
-			<li>Start Time: <%= nap.start_time %></li>
-			<li>End Time: <%= nap.end_time %></li>
+			<!-- Nap length should return the length of the nap in minutes. Will also need to think about date handling for overnight naps. -->
+			<li>Nap Length: <%= nap.end_time - nap.start_time %></li>
 			<li>Notes: <%= nap.notes %></li>
 		</ul>
 <% end %>
