@@ -24,77 +24,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get "/new" do
-    erb :'babies/new'
-  end
-
-  post "/babies" do
+  patch "/naps/:id" do
     if logged_in?
-      user = User.find_by(session[:user_id])
-      baby = Baby.new(name: params[:name], birthday: params[:birthday])
-      baby.user_id = user.id
-      baby.save
-
-      flash[:message] = "Congratulations on the new addition to the family!"
-
-      redirect to "/babies/#{baby.id}"
-    else
-      redirect to "/signup"
-    end
-  end
-
-  get "/babies/:id" do
-    @baby = Baby.find_by_id(params[:id])
-
-    @naps = []
-    Nap.all.each do |nap|
-      if nap.baby_id == @baby.id
-        @naps << nap
-      end
-    end
-
-    erb :'naps/index'
-  end
-
-  get "/babies/:id/new" do
-    @baby = Baby.find_by_id(params[:id])
-    erb :'naps/new'
-  end
-
-  get "/babies/:id/edit" do
-    @baby = Baby.find_by_id(params[:id])
-    birthday_string = @baby.birthday.to_s
-    @birthday = birthday_string.slice(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
-    erb :'babies/edit'
-  end
-
-  post "/naps" do
-    if logged_in?
-      user = User.find_by(session[:id])
-      baby = Baby.find_by(name: params[:name])
-      nap = Nap.new(start_time: params[:start_time], end_time: params[:end_time], notes: params[:notes])
-      nap.baby_id = baby.id
-      nap.save
-
-      flash[:message] = "Nap logged. Be sure to get some rest yourself."
+      naps = Nap.find_by(params[:id])
+      naps.update(start_time: params[:start_time].to_datetime, end_time: params[:end_time].to_datetime, notes: params[:notes])
       
-      redirect to "naps/#{nap.id}"
+      flash[:message] = "This nap has been updated. Are you getting some rest?"
+
+      redirect to "naps/#{naps.id}"
     end
-  end
-
-  get "/naps/:id" do
-    @nap = Nap.find_by_id(params[:id])
-    @baby = Baby.find_by(id: @nap.baby_id)
-    erb :'naps/show'
-  end
-
-  get "/naps/:id/edit" do
-    @naps = Nap.find_by_id(params[:id])
-    nap_start_string = @naps.start_time.to_s
-    @nap_start = nap_start_string.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
-    nap_end_string = @naps.end_time.to_s
-    @nap_end = nap_end_string.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
-    erb :'naps/edit'
   end
 
   patch "/babies/:id" do
@@ -105,17 +43,6 @@ class ApplicationController < Sinatra::Base
       flash[:message] = "Your baby has been updated."
       
       redirect to "babies/#{baby.id}"
-    end
-  end
-
-  patch "/naps/:id" do
-    if logged_in?
-      naps = Nap.find_by(params[:id])
-      naps.update(start_time: params[:start_time].to_datetime, end_time: params[:end_time].to_datetime, notes: params[:notes])
-      
-      flash[:message] = "This nap has been updated. Are you getting some rest?"
-
-      redirect to "naps/#{naps.id}"
     end
   end
 
