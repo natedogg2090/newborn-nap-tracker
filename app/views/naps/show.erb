@@ -11,4 +11,8 @@
 <p>Notes: <%= @nap.notes %></p>
 
 <p><a href="/naps/<%= @nap.id %>/edit">Edit</a></p>
+<p><form method="POST" action="/naps/<%= @nap.id %>/delete">
+	<input id="hidden" type="hidden" name="_method" value="delete">
+	<input type="submit" value="delete" id="Delete Nap">
+</form></p>
 <p><a href="/babies/<%= @baby.id %>">Back to Naps</a></p>

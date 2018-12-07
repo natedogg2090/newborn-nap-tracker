@@ -46,6 +46,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  delete "/naps/:id/delete" do
+    nap = Nap.find_by_id(params[:id])
+    nap.delete
+
+    redirect to "babies/#{nap.baby_id}"
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
