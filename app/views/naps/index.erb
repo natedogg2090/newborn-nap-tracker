@@ -4,6 +4,10 @@
 
 <h1>Here are all the naps for <%= @baby.name %></h1>
 
+<p>Birthday: <%= @baby.birthday %></p>
+<p><a href="/babies/<%= @baby.id %>/edit">Edit <%= @baby.name %></a> | <a href="/babies/<%= @baby.id %>/new">Enter a New Nap</a></p>
+
+
 <ol type="1">
 <% @naps.each do |nap| %>
 	<li>Nap <a href="/naps/<%= nap.id %>">(Details)</a></li>
@@ -14,4 +18,7 @@
 <% end %>
 </ol>
 
-<a href="/babies/<%= @baby.id %>/new">Enter a New Nap</a>
+<p><form method="POST" action="/babies/<%= @baby.id %>/delete">
+	<input id="hidden" type="hidden" name="_method" value="delete">
+	<input type="submit" value="Delete <%= @baby.name %>" id="Delete Baby">
+</form></p>
