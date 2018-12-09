@@ -29,7 +29,7 @@ class BabiesController < ApplicationController
       end
     end
 
-    erb :'naps/index'
+    erb :'babies/show'
   end
 
   get "/babies/:id/new" do

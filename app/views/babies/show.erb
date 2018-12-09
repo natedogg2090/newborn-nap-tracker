@@ -1,0 +1,10 @@
+<h1><%= @baby.name %> Details</h1>
+
+<br>
+<p>Birthday: <%= @baby.birthday %></p>
+
+<p><a href="/babies/<%= @baby.id %>/edit">Edit</a></p>
+<p><form method="POST" action="/naps/<%= @baby.id %>/delete">
+	<input id="hidden" type="hidden" name="_method" value="delete">
+	<input type="submit" value="delete" id="Delete Baby">
+</form></p>

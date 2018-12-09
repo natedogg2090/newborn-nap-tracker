@@ -3,7 +3,7 @@
 
 <ul>
 <% Baby.all.each do |baby| %>
-	<li><a href="/babies/<%= baby.id %>"><%= baby.name %></a> (<a href="/babies/<%= baby.id %>/edit">edit</a>)</li>
+	<li><a href="/babies/<%= baby.id %>"><%= baby.name %></a></li>
 <% end %>
 </ul>
 
