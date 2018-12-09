@@ -2,8 +2,13 @@ class Baby < ActiveRecord::Base
   belongs_to :user
   has_many :naps
 
-  validates :name, :presence => true
-  validates :birthday, :presence => true
-  validates :user_id, :presence => true
+  validates :name, :birthday, :user_id, :presence => true
+  
+  before_validation :capitalize_name
+
+  def capitalize_name
+    name.capitalize
+  end
+
 
 end
