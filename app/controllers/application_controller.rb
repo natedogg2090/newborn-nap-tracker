@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :welcome
+    erb :'welcome'
   end
 
   get "/babies" do
@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
       @user = User.find_by(:email => session[:email])
       erb :'babies/index'
     else
-      redirect to '/login'
+      redirect to "/login"
     end
   end
 
@@ -31,7 +31,9 @@ class ApplicationController < Sinatra::Base
       
       flash[:message] = "This nap has been updated. Are you getting some rest?"
 
-      redirect to "naps/#{naps.id}"
+      redirect to "/naps/#{naps.id}"
+    else
+      redirect to "/login"
     end
   end
 
@@ -42,7 +44,7 @@ class ApplicationController < Sinatra::Base
       
       flash[:message] = "Your baby has been updated."
       
-      redirect to "babies/#{baby.id}"
+      redirect to "/babies/#{baby.id}"
     end
   end
 
@@ -50,7 +52,7 @@ class ApplicationController < Sinatra::Base
     nap = Nap.find_by_id(params[:id])
     nap.delete
 
-    redirect to "babies/#{nap.baby_id}"
+    redirect to "/babies/#{nap.baby_id}"
   end
 
   delete "/babies/:id/delete" do
@@ -76,7 +78,7 @@ class ApplicationController < Sinatra::Base
         session[:email] = user.email
         redirect "/babies"
       else
-        redirect to "signup"
+        redirect to "/signup"
       end
     end
 
