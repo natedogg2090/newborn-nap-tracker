@@ -45,21 +45,31 @@ class ApplicationController < Sinatra::Base
       flash[:message] = "Your baby has been updated."
       
       redirect to "/babies/#{baby.id}"
+    else
+      redirect to "/login"
     end
   end
 
   delete "/naps/:id/delete" do
-    nap = Nap.find_by_id(params[:id])
-    nap.delete
+    if logged_in?
+      nap = Nap.find_by_id(params[:id])
+      nap.delete
 
-    redirect to "/babies/#{nap.baby_id}"
+      redirect to "/babies/#{nap.baby_id}"
+    else
+      redirect to "/login"
+    end
   end
 
   delete "/babies/:id/delete" do
-    baby = Baby.find_by_id(params[:id])
-    baby.delete
+    if logged_in?
+      baby = Baby.find_by_id(params[:id])
+      baby.delete
 
-    redirect to "/babies"
+      redirect to "/babies"
+    else
+      redirect to "/login"
+    end
   end
 
   helpers do
