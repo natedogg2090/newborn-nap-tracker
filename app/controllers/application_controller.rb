@@ -15,12 +15,12 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
-  get "/index" do
+  get "/babies" do
     if logged_in?
-      @user = User.find_by(session[:user_id])
+      @user = User.find_by(:email => session[:email])
       erb :'babies/index'
     else
-      redirect to '/'
+      redirect to '/login'
     end
   end
 
@@ -57,12 +57,16 @@ class ApplicationController < Sinatra::Base
     baby = Baby.find_by_id(params[:id])
     baby.delete
 
-    redirect to "index"
+    redirect to "/babies"
   end
 
   helpers do
     def logged_in?
-      !!session[:email]
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find_by(:email => session[:email]) if session[:email]
     end
 
     def login(email, password)
@@ -70,7 +74,7 @@ class ApplicationController < Sinatra::Base
 
       if user && user.authenticate(password)
         session[:email] = user.email
-        redirect "/index"
+        redirect "/babies"
       else
         redirect to "signup"
       end

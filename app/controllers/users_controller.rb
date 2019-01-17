@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   get "/signup" do
-    if session[:user_id] == nil
+    if session[:email] == nil
       erb :'users/signup'
     else
-      redirect to '/index'
+      redirect to '/babies'
     end
   end
 
@@ -13,9 +13,9 @@ class UsersController < ApplicationController
     
     if user.save
       if user.authenticate(params[:password])
-        session[:user_id] = @user.id
+        session[:email] = @user.id
       end
-      redirect to '/index'
+      redirect to '/babies'
     else
       redirect to '/signup'
     end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   post "/login" do
     if login(params[:email], params[:password])
-      redirect to "/index"
+      redirect to "/babies"
     else
       redirect to "/signup"
     end
