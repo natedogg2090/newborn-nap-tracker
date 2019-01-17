@@ -10,7 +10,7 @@
 
 <ol type="1">
 <% @naps.each do |nap| %>
-	<li>Nap Length (in minutes): <%= (nap.end_time - nap.start_time) / 1.minutes %> <a href="/naps/<%= nap.id %>">(Details)</a></li>
+	<li>Nap Length: <%= (nap.end_time - nap.start_time) / 1.minutes %> minutes <a href="/naps/<%= nap.id %>">(Details)</a></li>
 <% end %>
 </ol>
 

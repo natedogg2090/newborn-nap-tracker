@@ -1,9 +1,10 @@
 <h1>Enter a New Nap</h1>
+<br>
 
 <form action="/naps" method="POST">
-	<p>Baby Name: <input type="text" name="name" value="<%= @baby.name %>"></p>
+	<p>Enter a new nap for: <input type="text" name="baby_name" value="<%= @baby.name.capitalize %>"></p>
 	<p>Start Time: <input type="datetime-local" name="start_time"></p>
 	<p>End Time: <input type="datetime-local" name="end_time"></p>
 	<p>Notes: <input type="text" name="notes"></p>
-	<input type="submit" name="submit">
+	<input type="submit">
 </form>

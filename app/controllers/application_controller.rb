@@ -62,8 +62,24 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def logged_in?
-      !!session[:user_id]
+      !!session[:email]
     end
+
+    def login(email, password)
+      user = User.find_by(:email => email)
+
+      if user && user.authenticate(password)
+        session[:email] = user.email
+        redirect "/index"
+      else
+        redirect to "signup"
+      end
+    end
+
+    def logout!
+      session.clear
+    end
+
   end
 
 end

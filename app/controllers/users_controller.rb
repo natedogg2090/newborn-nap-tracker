@@ -27,24 +27,17 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
-    user = User.find_by(email: params[:email])
-
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect to '/index'
+    if login(params[:email], params[:password])
+      redirect to "/index"
     else
-      redirect to '/signup'
+      redirect to "/signup"
     end
     
   end
 
-  get "/logut" do
-    if session[:user_id] != nil
-      session.clear
-      redirect to "/"
-    else
-      redirect to "/"
-    end
+  get "/logout" do
+    logout!
+    redirect to "/"
   end
 
 end
