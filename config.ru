@@ -7,5 +7,6 @@ end
 use NapsController
 use BabiesController
 use UsersController
+use SessionsController
 use Rack::MethodOverride
 run ApplicationController

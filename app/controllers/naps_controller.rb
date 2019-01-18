@@ -22,6 +22,7 @@ class NapsController < ApplicationController
 
   get "/naps/:id/edit" do
     # binding.pry
+    # need to figure out a way to ID the user and have that carry through to the view.
     @naps = Nap.find_by_id(params[:id])
 
     nap_start_string = @naps.start_time.to_s
