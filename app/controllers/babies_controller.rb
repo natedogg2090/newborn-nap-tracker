@@ -15,7 +15,7 @@ class BabiesController < ApplicationController
 
   post "/babies" do
     if logged_in?
-      user = User.find_by(session[:email])
+      user = User.find_by(:email => session[:email])
       baby = Baby.new(name: params[:name], birthday: params[:birthday])
       baby.user_id = user.id
       baby.save
@@ -47,10 +47,18 @@ class BabiesController < ApplicationController
   end
 
   get "/babies/:id/edit" do
-    @baby = Baby.find_by_id(params[:id])
-    birthday_string = @baby.birthday.to_s
-    @birthday = birthday_string.slice(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
-    erb :'babies/edit'
+    if !logged_in?
+      redirect to "/login"
+    else
+      if current_user.babies.find_by_id(params[:id]) != nil
+        @baby = Baby.find_by_id(params[:id])
+        birthday_string = @baby.birthday.to_s
+        @birthday = birthday_string.slice(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+        erb :'babies/edit'
+      else
+        redirect to "/babies"
+      end
+    end
   end
 
 end
