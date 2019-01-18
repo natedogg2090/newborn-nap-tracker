@@ -3,7 +3,9 @@
 
 <ul>
 <% Baby.all.each do |baby| %>
+	<% if baby.user_id == @user.id %>
 	<li><a href="/babies/<%= baby.id %>"><%= baby.name.capitalize %></a></li>
+	<% end %>
 <% end %>
 </ul>
 

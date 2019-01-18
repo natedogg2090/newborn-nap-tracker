@@ -15,15 +15,6 @@ class ApplicationController < Sinatra::Base
     erb :'welcome'
   end
 
-  get "/babies" do
-    if logged_in?
-      @user = User.find_by(:email => session[:email])
-      erb :'babies/index'
-    else
-      redirect to "/login"
-    end
-  end
-
   patch "/naps/:id" do
     if logged_in?
       naps = Nap.find_by(params[:id])

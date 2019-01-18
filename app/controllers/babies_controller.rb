@@ -4,9 +4,18 @@ class BabiesController < ApplicationController
     erb :'babies/new'
   end
 
+  get "/babies" do
+    if logged_in?
+      @user = User.find_by(:email => session[:email])
+      erb :'babies/index'
+    else
+      redirect to "/login"
+    end
+  end
+
   post "/babies" do
     if logged_in?
-      user = User.find_by(session[:user_id])
+      user = User.find_by(session[:email])
       baby = Baby.new(name: params[:name], birthday: params[:birthday])
       baby.user_id = user.id
       baby.save
