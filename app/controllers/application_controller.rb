@@ -17,12 +17,12 @@ class ApplicationController < Sinatra::Base
 
   patch "/naps/:id" do
     if logged_in?
-      naps = Nap.find_by(params[:id])
-      naps.update(start_time: params[:start_time].to_datetime, end_time: params[:end_time].to_datetime, notes: params[:notes])
+      nap = Nap.find_by_id(params[:id])
+      nap.update(start_time: params[:start_time].to_datetime, end_time: params[:end_time].to_datetime, notes: params[:notes])
       
       flash[:message] = "This nap has been updated. Are you getting some rest?"
 
-      redirect to "/naps/#{naps.id}"
+      redirect to "/naps/#{nap.id}"
     else
       redirect to "/login"
     end

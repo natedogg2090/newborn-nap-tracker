@@ -1,9 +1,9 @@
 <h1>Edit Nap Details</h1>
 
-<form action="/naps/<%= @naps.id %>" method="POST">
+<form action="/naps/<%= @nap.id %>" method="POST">
 	<input id="hidden" type="hidden" name="_method" value="patch">
 	<p>Nap Start Time: <input type="text" name="start_time" id="start_time" value="<%= @nap_start %>"></p>
 	<p>Nap End Time: <input type="text" name="end_time" id="end_time" value="<%= @nap_end %>"></p>
-	<p>Nap Notes: <input type="text" name="notes" id="notes" value="<%= @naps.notes %>"></p>
+	<p>Nap Notes: <input type="text" name="notes" id="notes" value="<%= @nap.notes %>"></p>
 	<input type="submit" name="submit" id="submit">
 </form>
