@@ -24,7 +24,7 @@ class BabiesController < ApplicationController
 
       redirect to "/babies/#{baby.id}"
     else
-      redirect to "/signup"
+      redirect to "/login"
     end
   end
 
@@ -37,7 +37,6 @@ class BabiesController < ApplicationController
         @naps << nap
       end
     end
-
     erb :'naps/index'
   end
 
