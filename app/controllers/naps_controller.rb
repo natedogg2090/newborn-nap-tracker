@@ -30,10 +30,8 @@ class NapsController < ApplicationController
       @baby = Baby.find_by_id(@nap.baby_id)
 
       if @baby.user_id == current_user.id
-        nap_start_string = @nap.start_time.to_s
-        @nap_start = nap_start_string.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
-        nap_end_string = @nap.end_time.to_s
-        @nap_end = nap_end_string.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
+        @nap_start = @nap.start_time.to_s.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
+        @nap_end = @nap.end_time.to_s.slice(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/)
         erb :'naps/edit'
       else
         redirect to "/babies"
