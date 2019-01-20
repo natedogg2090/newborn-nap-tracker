@@ -5,14 +5,12 @@
 
 <h1>Nap Details for <%= @baby.name.capitalize %></h1>
 
-<p>Nap Start Time: <%= @nap.start_time %></p>
-<p>Nap End Time: <%= @nap.end_time %></p>
+<p>Nap Start Time: <%= @nap_start %></p>
+<p>Nap End Time: <%= @nap_end %></p>
 <p>Notes: <%= @nap.notes %></p>
 
-<p><a href="/naps/<%= @nap.id %>/edit">Edit</a></p>
+<p><a href="/naps/<%= @nap.id %>/edit">Edit Nap</a></p>
 <p><form method="POST" action="/naps/<%= @nap.id %>/delete">
 	<input id="hidden" type="hidden" name="_method" value="delete">
 	<input type="submit" value="Delete Nap" id="Delete Nap">
 </form></p>
-
-<p><a href="/babies/<%= @baby.id %>">Back to Naps</a></p>
