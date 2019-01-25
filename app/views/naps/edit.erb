@@ -2,6 +2,7 @@
 
 <form action="/naps/<%= @nap.id %>" method="POST">
 	<input id="hidden" type="hidden" name="_method" value="patch">
+	<input type="hidden" name="baby_id" value="<%= @baby.id %>">
 	<p>Nap Start Time: <input type="text" name="start_time" id="start_time" value="<%= @nap_start %>"></p>
 	<p>Nap End Time: <input type="text" name="end_time" id="end_time" value="<%= @nap_end %>"></p>
 	<p>Nap Notes: <input type="text" name="notes" id="notes" value="<%= @nap.notes %>"></p>

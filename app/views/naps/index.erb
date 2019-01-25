@@ -7,14 +7,14 @@
 <p>Birthday: <%= @baby.birthday %></p>
 <p><a href="/babies/<%= @baby.id %>/edit">Edit <%= @baby.name.capitalize %></a></p>
 
-<p><form method="POST" action="/babies/<%= @baby.id %>/delete">
+<p><form method="POST" action="/babies/<%= @baby.id %>">
 	<input id="hidden" type="hidden" name="_method" value="delete">
 	<input type="submit" value="Delete <%= @baby.name.capitalize %>" id="Delete Baby">
 </form></p>
 
 <h3>List of Naps for <%= @baby.name.capitalize %></h3>
 <ol type="1">
-<% @naps.each do |nap| %>
+<% @baby.naps.each do |nap| %>
 	<li>Nap Length: <%= (nap.end_time - nap.start_time) / 1.minutes %> minutes <a href="/naps/<%= nap.id %>">(Details)</a></li>
 <% end %>
 </ol>

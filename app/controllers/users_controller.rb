@@ -5,12 +5,16 @@ class UsersController < ApplicationController
   end
 
   post "/users" do
-    user = User.new(name: params[:name], email: params[:email], password: params[:password])
-    
-    if user.save
+    if existing_user
       redirect to '/login'
     else
-      erb :'users/signup'
+      user = User.new(name: params[:name], email: params[:email], password: params[:password])
+    
+      if user.save
+        redirect to '/login'
+      else
+        erb :'users/signup'
+      end
     end
 
   end
