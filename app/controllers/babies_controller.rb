@@ -5,6 +5,7 @@ class BabiesController < ApplicationController
   end
 
   get "/babies" do
+    binding.pry
     if logged_in?
       @user = User.find_by_id(session[:user_id])
       erb :'babies/index'
