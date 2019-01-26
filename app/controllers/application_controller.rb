@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= User.find_by_id(session[:id]) if session[:id]
+      @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     end
 
     def existing_user
@@ -32,7 +32,7 @@ class ApplicationController < Sinatra::Base
       user = User.find_by(:email => email)
 
       if user && user.authenticate(password)
-        session[:id] = user.id
+        session[:user_id] = user.id
         redirect "/babies"
       else
         redirect to "/signup"

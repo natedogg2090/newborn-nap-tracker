@@ -6,7 +6,7 @@ class BabiesController < ApplicationController
 
   get "/babies" do
     if logged_in?
-      @user = User.find_by_id(session[:id])
+      @user = User.find_by_id(session[:user_id])
       erb :'babies/index'
     else
       redirect to "/login"
