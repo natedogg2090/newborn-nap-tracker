@@ -12,6 +12,7 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem 'rack-flash3'
+gem 'nokogiri', '~> 1.10.4'
 
 group :test do
   gem 'rspec'
